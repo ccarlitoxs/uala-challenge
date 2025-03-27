@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface TextProps {
+interface TypographyProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: 'h1' | 'h2' | 'h3' | 'body1' | 'body2' | 'caption';
   size?: 'sm' | 'md' | 'lg';
   weight?: 'light' | 'regular' | 'medium' | 'bold';
@@ -15,7 +15,7 @@ const variantStyles = {
     line-height: 32px;
   `,
   h2: css`
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     line-height: 28px;
   `,
@@ -43,8 +43,9 @@ const variantStyles = {
 
 const sizeStyles = {
   sm: css`font-size: 12px;`,
-  md: css`font-size: 16px;`,
-  lg: css`font-size: 24px;`,
+  md: css`font-size: 14px;`,
+  lg: css`font-size: 22px;`,
+  xl: css`font-size: 34px;`,
 };
 
 const weightStyles = {
@@ -54,19 +55,19 @@ const weightStyles = {
   bold: css`font-weight: 700;`,
 };
 
-const TextBase = styled.span<TextProps>`
+const TypographyBase = styled.span<TypographyProps>`
   font-family: 'Public Sans', sans-serif;
-  color: ${({ color }) => color || 'var(--text-primary)'};
+  color: ${({ color }) => color || 'var(--Typography-primary)'};
 
-  ${({ variant }) => variantStyles[variant || 'body1']}
   ${({ size }) => sizeStyles[size || 'md']}
   ${({ weight }) => weightStyles[weight || 'regular']}
+  ${({ variant }) => variantStyles[variant || 'body1']}
 `;
 
-export const Text = ({ variant, color, children, size, weight, ...props }: TextProps) => {
+export const Typography = ({ variant, color, children, size, weight, ...props }: TypographyProps) => {
   return (
-    <TextBase variant={variant} color={color} size={size} weight={weight} {...props}>
+    <TypographyBase variant={variant} color={color} size={size} weight={weight} {...props}>
       {children}
-    </TextBase>
+    </TypographyBase>
   );
 }; 

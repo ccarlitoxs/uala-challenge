@@ -1,33 +1,11 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-import { AppBar } from '../UI/AppBar/AppBar';
-import { Sidebar } from '../UI/Sidebar/Sidebar';
+import { Outlet } from 'react-router-dom';
+import { AppBar } from '../UI/Molecules/AppBar/AppBar';
+import { Sidebar } from '../UI/Molecules/Sidebar/Sidebar';
+import { HomeIcon, MetricsIcon } from '@/assets/Icons';
+import { LayoutContainer, MainContent } from './MainLayout.styles';
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-const LayoutContainer = styled.div`
-  min-height: 100vh;
-  background-color: var(--background-main);
-`;
-
-const MainContent = styled.main<{ isSidebarCollapsed: boolean }>`
-  padding: 8rem 2.4rem 2.4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (max-width: 1023px) {
-    padding: 7.2rem 1.6rem 1.6rem;
-  }
-
-  @media (min-width: 1024px) {
-    margin-left: ${({ isSidebarCollapsed }) => (isSidebarCollapsed ? '72px' : '280px')};
-    transition: margin-left 0.3s ease;
-  }
-`;
-
-export const MainLayout = ({ children }: MainLayoutProps) => {
+export const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -41,29 +19,36 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 
   return (
     <LayoutContainer>
-      <Sidebar 
+      <Sidebar
         items={[
           {
             id: '1',
             href: '/',
+            icon: <HomeIcon />,
             label: 'Inicio',
             isActive: true,
           },
+          {
+            id: '2',
+            href: '/metricas',
+            label: 'Métricas',
+            isActive: false,
+            icon: <MetricsIcon />,
+          },
         ]}
-        isOpen={isSidebarOpen} 
+        isOpen={isSidebarOpen}
         isCollapsed={isSidebarCollapsed}
-        onClose={() => setIsSidebarOpen(false)} 
+        onClose={() => setIsSidebarOpen(false)}
       />
-      <AppBar 
-        title="Tus cobros" 
+      <AppBar
         onMenuClick={handleToggleSidebar}
         onToggleSidebar={handleToggleCollapse}
         isSidebarCollapsed={isSidebarCollapsed}
-        userName="John Doe"
+        userName="Username"
       />
       <MainContent isSidebarCollapsed={isSidebarCollapsed}>
-        {children}
+        <Outlet />
       </MainContent>
     </LayoutContainer>
   );
-}; 
+};
