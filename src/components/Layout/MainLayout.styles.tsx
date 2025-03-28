@@ -7,7 +7,7 @@ export const LayoutContainer = styled.div`
 
 export const MainContent = styled.main<{ isSidebarCollapsed: boolean }>`
     padding: 8rem 2.4rem 2.4rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 
     @media (max-width: 1024px) {
