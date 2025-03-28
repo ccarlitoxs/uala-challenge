@@ -3,15 +3,15 @@ import Home from './screens/Home';
 import { MainLayout } from './components/Layout/MainLayout';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-      </Routes>
-    </Router>
-  );
+   return (
+      <Router>
+         <Routes>
+            <Route element={<MainLayout />}>
+               <Route path="/" element={<Home />} />
+            </Route>
+         </Routes>
+      </Router>
+   );
 }
 
 export default App;
