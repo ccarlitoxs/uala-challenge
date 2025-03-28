@@ -1,6 +1,22 @@
 @font-face {
    font-family: 'Public Sans';
-   src: url('../assets/Fonts/PublicSans-Regular.ttf') format('truetype');
+   src: url('./assets/Fonts/PublicSans-Thin.ttf') format('truetype');
+   font-weight: 100;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'Public Sans';
+   src: url('./assets/Fonts/PublicSans-Light.ttf') format('truetype');
+   font-weight: 300;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'Public Sans';
+   src: url('./assets/Fonts/PublicSans-Regular.ttf') format('truetype');
    font-weight: 400;
    font-style: normal;
    font-display: swap;
@@ -8,7 +24,7 @@
 
 @font-face {
    font-family: 'Public Sans';
-   src: url('../assets/Fonts/PublicSans-Medium.ttf') format('truetype');
+   src: url('./assets/Fonts/PublicSans-Medium.ttf') format('');
    font-weight: 500;
    font-style: normal;
    font-display: swap;
@@ -16,7 +32,7 @@
 
 @font-face {
    font-family: 'Public Sans';
-   src: url('../assets/Fonts/PublicSans-SemiBold.ttf') format('truetype');
+   src: url('./assets/Fonts/PublicSans-SemiBold.ttf') format('truetype');
    font-weight: 600;
    font-style: normal;
    font-display: swap;
@@ -24,7 +40,7 @@
 
 @font-face {
    font-family: 'Public Sans';
-   src: url('../assets/Fonts/PublicSans-Bold.ttf') format('truetype');
+   src: url('./assets/Fonts/PublicSans-Bold.ttf') format('truetype');
    font-weight: 700;
    font-style: normal;
    font-display: swap;
@@ -63,7 +79,7 @@
    --background-header: #ffffff;
    --background-drawer: #ffffff;
 
-   --text-primary: #1a1a1a;
+   --text-primary: #313643;
    --text-secondary: #f1f1f1;
    --text-disabled: #3a3a3a;
 
@@ -73,10 +89,21 @@
    --medium: #c0c0c0;
    --medium-hover: #a0a0a0;
    --dark: #808080;
+   --neutral: #606882;
    --dark-hover: #565656;
    --darker: #333333;
    --darkest: #202020;
    --black: #101010;
+
+   /* Colores de Status */
+   --success: #1c8367;
+   --success-hover: #1c836790;
+   --success-light: #1c836710;
+   --error: #de350b;
+   --error-hover: #de350b90;
+   --error-light: #de350b10;
+
+   --skeleton-color: #DEE2EC;
 }
 
 /* Configuraciones globales */
