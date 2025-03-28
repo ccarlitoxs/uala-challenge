@@ -44,4 +44,8 @@ export const StyledButton = styled.button<ButtonProps>`
       opacity: 0.5;
       cursor: not-allowed;
    }
+
+   &:focus {
+      outline: none;
+   }
 `;
