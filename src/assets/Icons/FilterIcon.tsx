@@ -1,19 +1,7 @@
 import { SVGProps } from 'react';
 
-export const FilterIcon = ({
-    width = '18',
-    height = '16',
-    color = 'currentColor',
-    ...props
-}: SVGProps<SVGSVGElement>) => (
-    <svg
-        width={width}
-        height={height}
-        viewBox="0 0 18 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-    >
+export const FilterIcon = ({ width = '18', height = '16', color = 'currentColor', ...props }: SVGProps<SVGSVGElement>) => (
+    <svg width={width} height={height} viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <path
             d="M1 2.75H3C3 2.75 3.09 2.73 3.14 2.72C3.43 3.47 4.15 4 5 4C5.85 4 6.57 3.47 6.86 2.72C6.91 2.72 6.95 2.75 7 2.75H17C17.41 2.75 17.75 2.41 17.75 2C17.75 1.59 17.41 1.25 17 1.25H7C7 1.25 6.91 1.27 6.86 1.28C6.57 0.53 5.85 0 5 0C4.15 0 3.43 0.53 3.14 1.28C3.09 1.28 3.05 1.25 3 1.25H1C0.59 1.25 0.25 1.59 0.25 2C0.25 2.41 0.59 2.75 1 2.75ZM5 1.5C5.28 1.5 5.5 1.72 5.5 2C5.5 2.28 5.28 2.5 5 2.5C4.72 2.5 4.5 2.28 4.5 2C4.5 1.72 4.72 1.5 5 1.5Z"
             fill={color}

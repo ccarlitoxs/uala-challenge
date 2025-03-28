@@ -1,19 +1,7 @@
 import { SVGProps } from 'react';
 
-export const AnalyticsIcon = ({
-    width = '19',
-    height = '19',
-    color = 'currentColor',
-    ...props
-}: SVGProps<SVGSVGElement>) => (
-    <svg
-        width={width}
-        height={height}
-        viewBox="0 0 19 19"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-    >
+export const AnalyticsIcon = ({ width = '19', height = '19', color = 'currentColor', ...props }: SVGProps<SVGSVGElement>) => (
+    <svg width={width} height={height} viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <path
             d="M15.032 10.7257C14.6222 10.6956 14.2624 11.0158 14.2324 11.426C14.0126 14.6978 11.274 17.2592 7.99581 17.2592C4.54768 17.2592 1.74919 14.4577 1.74919 11.0058C1.74919 7.55395 4.30781 4.98256 7.57604 4.76244C7.98582 4.73242 8.30565 4.38223 8.27566 3.96201C8.24568 3.55178 7.89587 3.24162 7.47609 3.26163C3.41829 3.53177 0.25 6.92361 0.25 10.9958C0.25 15.2681 3.72812 18.75 7.99581 18.75C12.2635 18.75 15.4618 15.5683 15.7216 11.5161C15.7516 11.1059 15.4318 10.7457 15.022 10.7157L15.032 10.7257Z"
             fill={color}

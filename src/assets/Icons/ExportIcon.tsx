@@ -1,19 +1,7 @@
 import { SVGProps } from 'react';
 
-export const ExportIcon = ({
-    width = '20',
-    height = '18',
-    color = 'currentColor',
-    ...props
-}: SVGProps<SVGSVGElement>) => (
-    <svg
-        width={width}
-        height={height}
-        viewBox="0 0 20 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-    >
+export const ExportIcon = ({ width = '20', height = '18', color = 'currentColor', ...props }: SVGProps<SVGSVGElement>) => (
+    <svg width={width} height={height} viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <path
             d="M9.47 12.53C9.54 12.6 9.62 12.65 9.71 12.69C9.8 12.73 9.9 12.75 10 12.75C10.1 12.75 10.2 12.73 10.29 12.69C10.38 12.65 10.46 12.6 10.53 12.53L14.53 8.53C14.82 8.24 14.82 7.76 14.53 7.47C14.24 7.18 13.76 7.18 13.47 7.47L10.75 10.19V1C10.75 0.59 10.41 0.25 10 0.25C9.59 0.25 9.25 0.59 9.25 1V10.19L6.53 7.47C6.24 7.18 5.76 7.18 5.47 7.47C5.18 7.76 5.18 8.24 5.47 8.53L9.47 12.53Z"
             fill={color}

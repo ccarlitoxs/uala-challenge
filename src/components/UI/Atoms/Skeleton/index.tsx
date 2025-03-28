@@ -9,12 +9,7 @@ interface SkeletonProps {
 
 const Skeleton = styled.div<SkeletonProps>`
     display: inline-block;
-    background: linear-gradient(
-        90deg,
-        ${({ color }) => color || 'var(--skeleton-color)'} 25%,
-        rgba(255, 255, 255, 0.2) 50%,
-        ${({ color }) => color || 'var(--skeleton-color)'} 75%
-    );
+    background: linear-gradient(90deg, ${({ color }) => color || 'var(--skeleton-color)'} 25%, rgba(255, 255, 255, 0.2) 50%, ${({ color }) => color || 'var(--skeleton-color)'} 75%);
     background-size: 200% 100%;
     animation: shimmer 3s infinite ease-in-out;
     width: ${({ width }) => width || '100%'};
