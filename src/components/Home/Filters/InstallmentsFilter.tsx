@@ -1,6 +1,5 @@
-import { ChipsSelect } from '@/components/UI/Molecules/ChipsSelect/ChipsSelect';
-import { useState } from 'react';
 import styled from 'styled-components';
+import { ChipsSelect } from '@/components/UI/Molecules/ChipsSelect/ChipsSelect';
 
 export const FilterContainer = styled.div`
     display: flex;
@@ -11,12 +10,11 @@ export const FilterContainer = styled.div`
 `;
 
 interface InstallmentsFilterProps {
-    onApply?: () => void;
+    values: string[];
+    onChange?: (values: string | string[]) => void;
 }
 
-export const InstallmentsFilter = ({ onApply }: InstallmentsFilterProps) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
+export const InstallmentsFilter = ({ values, onChange: onChangeValues }: InstallmentsFilterProps) => {
     const options = [
         { value: '1', label: '1' },
         { value: '2', label: '2' },
@@ -25,18 +23,9 @@ export const InstallmentsFilter = ({ onApply }: InstallmentsFilterProps) => {
         { value: '12', label: '12' },
     ];
 
-    const handleChange = (values: string[]) => {
-        setSelectedValues(values);
-    };
-
-    const handleApply = () => {
-        console.log('selectedValues in installments filter', selectedValues);
-        onApply?.();
-    };
-
     return (
         <FilterContainer>
-            <ChipsSelect placeholder="Todas" options={options} selectedValues={selectedValues} onChange={handleChange} />
+            <ChipsSelect placeholder="Todas" options={options} selectedValues={values} onChange={onChangeValues} />
         </FilterContainer>
     );
 };

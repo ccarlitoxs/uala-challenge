@@ -11,24 +11,14 @@ export const FilterContainer = styled.div`
 `;
 
 interface DateFilterProps {
-    onApply?: () => void;
+    values?: [Date | null, Date | null];
+    onChange?: (values: [Date | null, Date | null]) => void;
 }
 
-export const DateFilter = ({ onApply }: DateFilterProps) => {
-    const [selectedValues, setSelectedValues] = useState<[Date | null, Date | null]>([null, null]);
-
-    const handleChange = (dates: [Date | null, Date | null]) => {
-        setSelectedValues(dates);
-    };
-
-    const handleApply = () => {
-        console.log('selectedValues in date filter', selectedValues);
-        onApply?.();
-    };
-
+export const DateFilter = ({ values, onChange }: DateFilterProps) => {
     return (
         <FilterContainer>
-            <Calendar onRangeChange={handleChange} />
+            <Calendar onChange={onChange} values={values} />
         </FilterContainer>
     );
 };

@@ -11,12 +11,11 @@ export const FilterContainer = styled.div`
 `;
 
 interface PaymentMethodsFilterProps {
-    onApply?: () => void;
+    values: string[];
+    onChange?: (values: string[] | string) => void;
 }
 
-export const PaymentMethodsFilter = ({ onApply }: PaymentMethodsFilterProps) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
+export const PaymentMethodsFilter = ({ values, onChange: onChangeValues }: PaymentMethodsFilterProps) => {
     const options = [
         { value: 'link', label: 'Link de pago' },
         { value: 'qr', label: 'Código QR' },
@@ -24,18 +23,9 @@ export const PaymentMethodsFilter = ({ onApply }: PaymentMethodsFilterProps) => 
         { value: 'POS', label: 'POS Pro' },
     ];
 
-    const handleChange = (values: string[]) => {
-        setSelectedValues(values);
-    };
-
-    const handleApply = () => {
-        console.log('selectedValues in payment methods filter', selectedValues);
-        onApply?.();
-    };
-
     return (
         <FilterContainer>
-            <ChipsSelect options={options} selectedValues={selectedValues} onChange={handleChange} />
+            <ChipsSelect options={options} selectedValues={values} onChange={onChangeValues} />
         </FilterContainer>
     );
 };

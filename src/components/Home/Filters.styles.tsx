@@ -1,22 +1,22 @@
 import styled from 'styled-components';
+import { ButtonPresets } from '../UI/Atoms/Button';
 
-export const FilterContainer = styled.div`
+export const FiltersContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
 `;
 
-export const ClearButton = styled.button`
-    color: var(--primary);
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    padding: 0.4rem;
-    
-    &:hover {
-        opacity: 0.8;
-    }
+export const FiltersHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.6rem;
+`;
+
+export const ClearButton = styled(ButtonPresets.TextPrimaryButton)`
+    font-size: 1.6rem;
+    padding: 1rem 0;
 `;
 
 export const OptionIcon = styled.img`

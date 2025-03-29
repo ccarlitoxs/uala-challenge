@@ -11,30 +11,20 @@ export const FilterContainer = styled.div`
 `;
 
 interface CardFilterProps {
-    onApply?: () => void;
+    values: string[];
+    onChange?: (values: string[] | string) => void;
 }
 
-export const CardFilter = ({ onApply }: CardFilterProps) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
+export const CardFilter = ({ values, onChange: onChangeValues }: CardFilterProps) => {
     const options = [
         { value: 'visa', label: 'Visa' },
         { value: 'mastercard', label: 'Mastercard' },
         { value: 'amex', label: 'Amex' },
     ];
 
-    const handleChange = (values: string[]) => {
-        setSelectedValues(values);
-    };
-
-    const handleApply = () => {
-        console.log('selectedValues in card filter', selectedValues);
-        onApply?.();
-    };
-
     return (
         <FilterContainer>
-            <ChipsSelect placeholder="Todas" options={options} selectedValues={selectedValues} onChange={handleChange} />
+            <ChipsSelect placeholder="Todas" options={options} selectedValues={values} onChange={onChangeValues} />
         </FilterContainer>
     );
 };
