@@ -1,76 +1,96 @@
-import styled from 'styled-components';
+import { useState, useEffect, useRef } from 'react';
 import { Typography } from '../UI/Atoms/Typography';
 import { FilterIcon } from '@/assets/Icons/FilterIcon';
 import { ExportIcon } from '@/assets/Icons/ExportIcon';
 import { ButtonPresets } from '../UI/Atoms/Button';
 import TransactionItem from './TransactionItem';
 import { Transaction } from '@/interfaces/app.types';
+import Calendar from '../UI/Molecules/Calendar/Calendar';
+import { Drawer } from '../UI/Molecules/Drawer/Drawer';
+import {
+    ListContainer,
+    ExportCalendarContainer,
+    CalendarButtonContainer,
+    CalendarHeader,
+    CalendarIcon,
+    ListHeader,
+    HeaderActions,
+    HeaderButton,
+    EmptyStateContainer,
+    EmptyStateIcon,
+    ListContent,
+} from './TransactionList.styles';
+import { Filters } from './Filters';
 
-interface TransactionListProps {
+export interface TransactionListProps {
     transactions?: Transaction[];
 }
 
-const ListContainer = styled.div`
-    overflow-y: auto;
-    width: 100%;
-`;
-
-const ListHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.6rem 0.8rem;
-    border-bottom: 1px solid #eeeeee;
-
-    @media (max-width: 768px) {
-        padding: 1.2rem 1.6rem;
-    }
-`;
-
-const ListContent = styled.div`
-    padding: 0;
-`;
-
-const HeaderActions = styled.div`
-    display: flex;
-    gap: 1.2rem;
-`;
-
-const HeaderButton = styled(ButtonPresets.TextPrimaryButton)`
-    padding: 0;
-    width: 2em;
-    height: 2em;
-`;
-
-const EmptyStateContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem;
-    gap: 1.6rem;
-    max-width: 32rem;
-    margin: 0 auto;
-    margin-top: 4.8rem;
-`;
-
-const EmptyStateIcon = styled.img`
-    width: 7rem;
-    height: 7rem;
-`;
-
 export const TransactionList = ({ transactions = [] }: TransactionListProps) => {
+    const [isExportCalendarOpen, setIsExportCalendarOpen] = useState(false);
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const calendarRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+                setIsExportCalendarOpen(false);
+            }
+        };
+
+        if (isExportCalendarOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isExportCalendarOpen]);
+
+    const handleCloseCalendar = () => {
+        setIsExportCalendarOpen(false);
+    };
+
+    const handleExport = () => {
+        setIsExportCalendarOpen(false);
+    };
+
+    const handleApplyFilters = () => {
+        // Handle filter application logic here
+        setIsFiltersOpen(false);
+    };
+
     return (
         <ListContainer>
+            <Drawer isOpen={isFiltersOpen} onClose={() => setIsFiltersOpen(false)} title="Filtros" onApply={handleApplyFilters}>
+                <Filters />
+            </Drawer>
+            <ExportCalendarContainer ref={calendarRef} isOpen={isExportCalendarOpen}>
+                <Calendar
+                    onRangeChange={() => {}}
+                    footer={
+                        <CalendarButtonContainer>
+                            <ButtonPresets.OutlinedPrimaryButton onClick={handleCloseCalendar}>Cerrar</ButtonPresets.OutlinedPrimaryButton>
+                            <ButtonPresets.RoundedPrimaryButton onClick={handleExport}>Descargar</ButtonPresets.RoundedPrimaryButton>
+                        </CalendarButtonContainer>
+                    }
+                    header={
+                        <CalendarHeader>
+                            <CalendarIcon src="/icons/calendar-icon.svg" alt="" />
+                            <Typography variant="h2">Elegí las fechas que querés descargar</Typography>
+                        </CalendarHeader>
+                    }
+                />
+            </ExportCalendarContainer>
             <ListHeader>
                 <Typography variant="h3" size="sm">
                     Historial de transacciones
                 </Typography>
                 <HeaderActions>
-                    <HeaderButton>
+                    <HeaderButton onClick={() => setIsFiltersOpen(true)}>
                         <FilterIcon />
                     </HeaderButton>
-                    <HeaderButton>
+                    <HeaderButton onClick={() => setIsExportCalendarOpen(true)}>
                         <ExportIcon />
                     </HeaderButton>
                 </HeaderActions>
