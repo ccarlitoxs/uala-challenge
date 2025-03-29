@@ -87,9 +87,14 @@ export const Title = styled(Typography)`
 `;
 
 export const Avatar = styled.div`
+    display: none;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
+
+    @media (min-width: 1024px) {
+        display: block;
+    }
 `;
 
 export const AvatarImage = styled.img`

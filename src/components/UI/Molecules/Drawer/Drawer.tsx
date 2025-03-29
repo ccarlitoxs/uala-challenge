@@ -1,18 +1,19 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { Typography } from '../../Atoms/Typography';
-import { ButtonPresets } from '../../Atoms/Button';
 import { ArrowLeftIcon } from '@/assets/Icons/ArrowLeftIcon';
 import { DrawerContainer, DrawerContent, DrawerHeader, DrawerFooter, BackButton, Overlay } from './Drawer.styles';
 
 export interface DrawerProps {
     isOpen: boolean;
-    onClose: () => void;
-    title: string;
+    title?: string;
+    header?: ReactNode;
     children?: ReactNode;
+    footer?: ReactNode;
+    onClose: () => void;
     onApply?: () => void;
 }
 
-export const Drawer = ({ isOpen, onClose, title, children, onApply }: DrawerProps) => {
+export const Drawer = ({ isOpen, onClose, title, header, children, footer, onApply }: DrawerProps) => {
     const drawerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -36,17 +37,19 @@ export const Drawer = ({ isOpen, onClose, title, children, onApply }: DrawerProp
             {isOpen && <Overlay />}
             <DrawerContainer ref={drawerRef} isOpen={isOpen}>
                 <DrawerHeader>
-                    <BackButton onClick={onClose}>
-                        <ArrowLeftIcon color="var(--primary)" />
-                    </BackButton>
-                    <Typography variant="h2">{title}</Typography>
+                    {header ? (
+                        header
+                    ) : (
+                        <>
+                            <BackButton onClick={onClose}>
+                                <ArrowLeftIcon color="var(--primary)" />
+                            </BackButton>
+                            <Typography variant="h2">{title}</Typography>
+                        </>
+                    )}
                 </DrawerHeader>
                 <DrawerContent>{children}</DrawerContent>
-                <DrawerFooter>
-                    <ButtonPresets.RoundedPrimaryButton onClick={onApply} fullWidth>
-                        Aplicar filtros
-                    </ButtonPresets.RoundedPrimaryButton>
-                </DrawerFooter>
+                <DrawerFooter>{footer}</DrawerFooter>
             </DrawerContainer>
         </>
     );

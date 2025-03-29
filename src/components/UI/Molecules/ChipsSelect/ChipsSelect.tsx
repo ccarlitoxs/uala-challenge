@@ -10,7 +10,7 @@ interface ChipsSelectProps {
   options: ChipOption[];
   selectedValues: string[];
   placeholder?: string;
-  onChange: (values: string[]) => void;
+  onChange?: (values: string[] | string) => void;
   multiple?: boolean;
 }
 
@@ -23,7 +23,7 @@ export const ChipsSelect: React.FC<ChipsSelectProps> = ({
 }) => {
   const handleChipClick = (value: string) => {
     if (!multiple) {
-      onChange([value]);
+      onChange?.(value);
       return;
     }
 
@@ -31,7 +31,7 @@ export const ChipsSelect: React.FC<ChipsSelectProps> = ({
       ? selectedValues.filter((v) => v !== value)
       : [...selectedValues, value];
 
-    onChange(newSelectedValues);
+    onChange?.(newSelectedValues);
   };
 
   const isSelected = (value: string) => selectedValues.includes(value);
@@ -41,7 +41,7 @@ export const ChipsSelect: React.FC<ChipsSelectProps> = ({
       {placeholder && (
         <ChipButton
           selected={selectedValues.length === 0}
-          onClick={() => onChange([])}
+          onClick={() => onChange?.([])}
         >
           {placeholder}
         </ChipButton>

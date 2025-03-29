@@ -1,37 +1,29 @@
 import { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker, { DatePickerProps } from 'react-datepicker';
 import { registerLocale } from 'react-datepicker';
 import { es } from 'date-fns/locale';
 import { capitalizeFirstLetter } from '@/helpers/utils';
 import { CalendarContainer, DatePickerContainer } from './Calendar.styles';
+import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale('es', es);
 
-export interface CalendarContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export type CalendarProps = {
     header?: React.ReactNode;
     footer?: React.ReactNode;
-    onRangeChange?: (dates: [Date | null, Date | null]) => void;
+    onChange?: (dates: [Date | null, Date | null]) => void;
+    values?: [Date | null, Date | null];
 }
 
-const Calendar = ({ header, footer, onRangeChange, ...props }: CalendarContainerProps) => {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
-    const [endDate, setEndDate] = useState<Date | null>(null);
-    const onChange = (dates: [Date | null, Date | null]) => {
-        const [start, end] = dates;
-        setStartDate(start);
-        setEndDate(end);
-        onRangeChange?.(dates);
-    };
-
+const Calendar = ({ header, footer, onChange, values }: CalendarProps) => {
     return (
-        <CalendarContainer {...props}>
+        <CalendarContainer>
             {header}
             <DatePickerContainer>
                 <DatePicker
-                    selected={startDate}
                     onChange={onChange}
-                    startDate={startDate}
-                    endDate={endDate}
+                    startDate={values?.[0]}
+                    endDate={values?.[1]}
                     selectsRange
                     inline
                     className="date-picker"
@@ -45,3 +37,4 @@ const Calendar = ({ header, footer, onRangeChange, ...props }: CalendarContainer
 };
 
 export default Calendar;
+

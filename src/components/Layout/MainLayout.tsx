@@ -5,7 +5,6 @@ import { Sidebar } from '../UI/Molecules/Sidebar/Sidebar';
 import { HomeIcon, MetricsIcon } from '@/assets/Icons';
 import { LayoutContainer, MainContent } from './MainLayout.styles';
 import { Toaster } from 'sonner';
-import "react-datepicker/dist/react-datepicker.css";
 
 export const MainLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
