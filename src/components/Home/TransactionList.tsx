@@ -22,6 +22,7 @@ import {
 } from './TransactionList.styles';
 import { Filters } from './Filters';
 import { convertToCSV, downloadCSV } from '@/helpers/csv';
+import { toast } from 'sonner';
 
 export interface TransactionListProps {
     transactions?: Transaction[];
@@ -60,6 +61,11 @@ export const TransactionList = ({ transactions = [] }: TransactionListProps) => 
             const transactionDate = new Date(transaction.createdAt);
             return transactionDate >= dateFilterValues[0] && transactionDate <= dateFilterValues[1];
         });
+
+        if (filteredTransactions.length === 0) {
+            toast.error('No hay movimientos en las fechas seleccionadas para descargar');
+            return;
+        }
 
         const csvContent = convertToCSV(filteredTransactions);
         const filename = `transacciones_${new Date().toISOString().split('T')[0]}.csv`;
