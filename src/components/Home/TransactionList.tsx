@@ -21,6 +21,7 @@ import {
     ListContent,
 } from './TransactionList.styles';
 import { Filters } from './Filters';
+import { convertToCSV, downloadCSV } from '@/helpers/csv';
 
 export interface TransactionListProps {
     transactions?: Transaction[];
@@ -29,6 +30,7 @@ export interface TransactionListProps {
 export const TransactionList = ({ transactions = [] }: TransactionListProps) => {
     const [isExportCalendarOpen, setIsExportCalendarOpen] = useState(false);
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const [dateFilterValues, setDateFilterValues] = useState<[Date | null, Date | null]>([null, null]);
     const calendarRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -48,11 +50,21 @@ export const TransactionList = ({ transactions = [] }: TransactionListProps) => 
     }, [isExportCalendarOpen]);
 
     const handleCloseCalendar = () => {
+        setDateFilterValues([null, null]);
         setIsExportCalendarOpen(false);
     };
 
     const handleExport = () => {
-        setIsExportCalendarOpen(false);
+        const filteredTransactions = transactions.filter(transaction => {
+            if (!dateFilterValues[0] || !dateFilterValues[1]) return true;
+            const transactionDate = new Date(transaction.createdAt);
+            return transactionDate >= dateFilterValues[0] && transactionDate <= dateFilterValues[1];
+        });
+
+        const csvContent = convertToCSV(filteredTransactions);
+        const filename = `transacciones_${new Date().toISOString().split('T')[0]}.csv`;
+        downloadCSV(csvContent, filename);
+        handleCloseCalendar();
     };
 
     const handleApplyFilters = () => {
@@ -62,12 +74,22 @@ export const TransactionList = ({ transactions = [] }: TransactionListProps) => 
 
     return (
         <ListContainer>
-            <Drawer isOpen={isFiltersOpen} onClose={() => setIsFiltersOpen(false)} title="Filtros" onApply={handleApplyFilters}>
+            <Drawer
+                isOpen={isFiltersOpen}
+                onClose={() => setIsFiltersOpen(false)}
+                title="Filtros"
+                footer={
+                    <ButtonPresets.RoundedPrimaryButton onClick={handleApplyFilters} fullWidth>
+                        Aplicar filtros
+                    </ButtonPresets.RoundedPrimaryButton>
+                }
+            >
                 <Filters />
             </Drawer>
             <ExportCalendarContainer ref={calendarRef} isOpen={isExportCalendarOpen}>
                 <Calendar
-                    onRangeChange={() => {}}
+                    onChange={setDateFilterValues}
+                    values={dateFilterValues}
                     footer={
                         <CalendarButtonContainer>
                             <ButtonPresets.OutlinedPrimaryButton onClick={handleCloseCalendar}>Cerrar</ButtonPresets.OutlinedPrimaryButton>
