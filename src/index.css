@@ -75,9 +75,15 @@
     --primary: #022a9a;
     --primary-hover: #022a9a90;
     --primary-light: #3564fd;
+    --primary-light-hover: #3564fd90;
+    --primary-dark: #002066;
+
     --background-main: #fafafa;
     --background-header: #ffffff;
     --background-drawer: #ffffff;
+    --background-calendar: #ffffff;
+    --background-calendar-range: #e7eeff;
+    --background-chips-select: #E0EDFF;
 
     --text-primary: #313643;
     --text-secondary: #f1f1f1;

@@ -33,9 +33,7 @@ const Home = () => {
                     </ButtonPresets.TextPrimaryButton>
                 </MetricsContainer>
 
-                <TransactionList
-                // transactions={mockTransactions}
-                />
+                <TransactionList transactions={mockTransactions} />
             </DashboardContainer>
         </Dashboard>
     );
