@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChipsSelectContainer, ChipButton } from './ChipsSelect.styles';
+import { ChipsSelectContainer, ChipButton, CloseIcon } from './ChipsSelect.styles';
 
 export interface ChipOption {
   value: string;
@@ -53,6 +53,7 @@ export const ChipsSelect: React.FC<ChipsSelectProps> = ({
           onClick={() => handleChipClick(option.value)}
         >
           {option.label}
+          {isSelected(option.value) && <CloseIcon src="/icons/close-icon.svg" />}
         </ChipButton>
       ))}
     </ChipsSelectContainer>

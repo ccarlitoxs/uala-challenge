@@ -21,6 +21,9 @@ export const ChipButton = styled.button<ChipButtonProps>`
     transition: all 0.2s ease;
     outline: none;
     font-weight: ${({ selected }) => (selected ? 600 : 400)};
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 
     &:hover {
         background-color: var(--primary-light-hover);
@@ -36,4 +39,9 @@ export const ChipButton = styled.button<ChipButtonProps>`
         outline: none;
         border: 1px solid var(--primary-dark);
     }
+`;
+
+export const CloseIcon = styled.img`
+    width: 0.85rem;
+    height: 0.85rem;
 `;

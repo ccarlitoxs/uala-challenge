@@ -14,7 +14,7 @@ export const ExportCalendarContainer = styled.div<{ isOpen: boolean }>`
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 6.1rem;
+    margin-top: 6.1rem;
     opacity: ${props => (props.isOpen ? 1 : 0)};
     pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
     transition: opacity 0.2s ease-in-out;
